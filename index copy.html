@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Detecting Fraud With Oversampling Techniques and Sparsity Contraints</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.png" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+</head>
+
+<body id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="#page-top">DSC180B B12-2</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars ms-1"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="#services">Background</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio">Dataset</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">Methods</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">Details on the Implementation</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#results">Results</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#discussion">Discussion</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#material">Project Material</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Masthead-->
+    <header class="masthead">
+        <div class="container">
+            <div class="masthead-subheading">Prabina Pokharel / Jingyu Zhang / Yandong (Dennis) Xiang</div>
+            <div class="masthead-heading text-uppercase">Detecting Fraud With Oversampling Techniques and Sparsity Contraints</div>
+            <a class="btn btn-primary btn-xl text-uppercase" href="#services">Tell Me More</a>
+        </div>
+    </header>
+    <!-- Services-->
+    <section class="page-section" id="services">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Background</h2>
+                <h3 class="section-subheading text-muted">How did this project come to be?</h3>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa-solid fa-school fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="my-3">Motivation</h4>
+                    <p class="text-muted">In recent years, there has been a huge surge in the usage of online platforms like Reddit,
+                        Yelp, and Amazon. While the usage of such platforms has positively influenced our daily
+                        lives, fraudulent activities is amid this rapid increase in digital data volume and anonymity
+                        of online networks. Fraudulent behaviors are executed and hidden in plain sight of this
+                        vast amount of online records. Thus, enhancing fraud detection is crucial to protect us
+                        from fraudsters against harmful scams, and even criminal activities.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="my-3">Need For Better Fraud Detection Method</h4>
+                    <p class="text-muted">Many techniques exist to combat fraud; 
+                        however, they often fail to capture the imbalancement in class data involving 
+                        fraudulent activities. It’s important to tackle such concern so we can harness its
+                        power to correctly predict anomalies. So, the question remains: How can we
+                        effectively detect and mitigate fraudulent activities, especially when faced
+                        with imbalanced datasets? Our research contributes to the study of such 
+                        concern with a model that harnesses the benefits of many existing models. We
+                        propose a solution that utilizes a combination of oversampling techniques and
+                        sparsity constraints to balance and predict fraud data.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa-solid fa-user-secret fa-stack-1x fa-inverse"></i>
+                        <!-- <i class="fa-solid fa-user-secret"></i> -->
+                    </span>
+                    <h4 class="my-3">Our Proposed Solution</h4>
+                    <p class="text-muted">So, our proposed solution is the combination of 2 models: GraphSmote and SparseGAD.
+                        GraphSmote, although not commonly
+                        used for fraud detection, is an oversampling technique that identifies minority class nodes
+                        and creates new nodes that resemble those minority class data points, thus helping it 
+                        balance. Since datasets involving fraud detection are hugely imbalanced, GraphSmote will
+                        help us balance the class distribution in the graph. We will then take the output of this
+                        GraphSmote and feed it into SparseGAD, known for anomaly detection by introducing 
+                        sparsity constraints. Such constraints help highlight significant connections, and anything that
+                        substantially deviates from that will be looked into further for fraud. We will discuss our
+                        model in more detail in the Methods section of this paper.
+                        By tackling this fraud detection task, we hope to contribute to protecting us against scams.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- Portfolio Grid-->
+    <section class="page-section bg-light" id="portfolio">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Dataset</h2>
+            </div>
+            <div class="dataset-details">
+                <h3>Details on our dataset</h3>
+                <p class='text-muted'>
+                    Our model utilizes three datasets - Amazon, Yelp, and Reddit. These datasets are obtained from the Deep Graph Library (DGL) in graph format. 
+                    Each dataset exhibits class imbalance:
+                </p>
+                <ul>
+                    <li><strong>Amazon Dataset:</strong> Features product reviews under the Musical Instruments category. It's a binary classification task with a 1:10.5 positive (fraudulent) to negative (benign) ratio.</li>
+                    <li><strong>Yelp Dataset:</strong> Consists of hotel and restaurant reviews, with a 1:5.9 imbalance between spam and legitimate reviews.</li>
+                    <li><strong>Reddit Dataset:</strong> Comprises community posts from September 2014, with 3.3% anomalies detected.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+
+
+
+
+
+
+
+    <!-- About-->
+    <section class="page-section" id="about">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Methods</h2>
+                <h3 class="section-subheading text-muted">Timeline of development for our two models.</h3>
+            </div>
+            <ul class="timeline">
+                <li>
+                    <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/dataset.png"
+                            alt="..." /></div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h3>Obtain Dataset</h3>
+                            <h5 class="subheading">Choosing the Right Dataset based on Structure</h5>
+                        </div>
+                        <div class="timeline-body">
+                            <p class="text-muted">We chose Amazon, Yelp, and Reddit datasets carefully based on its imbalanced structure.
+                                Imbalanced datasets are valuable for our model, 
+                                which aims to address class imbalances in anomaly detection tasks.
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li class="timeline-inverted">
+                    <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/writing.png"
+                            alt="..." /></div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h3>First model</h3>
+                            <h5 class="subheading">GraphSmote</h5>
+                        </div>
+                        <div class="timeline-body">
+
+                            <p class="text-muted">
+                                We feed our datasets into Graph-Smote model. 
+                                GraphSmote, although not commonly used for fraud detection, is an oversampling technique that 
+                                identifies minority class nodes and creates new nodes that resemble those minority class data points, 
+                                thus helping it balance. Since datasets involving fraud detection are hugely imbalanced, 
+                                GraphSmote will help us balance the class distribution in the graph. 
+
+                                There, we finetune some hyperparameters to achieve a better ROC-AUC score.
+                            </p>
+
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="timeline-image"><img class="rounded-circle img-fluid"
+                            src="assets/img/about/handyman.png" alt="..." /></div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h3>Second model</h3>
+                            <h5 class="subheading">SparseGAD</h5>
+                        </div>
+                        <div class="timeline-body">
+                            <p class="text-muted">
+                                We take the output of GraphSmote and feed it as input to SparseGAD model.
+                                SparseGAD is known for anomaly detection by introducing sparsity constraints. 
+                                Such constraints help highlight significant connections, and anything that substantially deviates 
+                                from that will be looked into further for fraud.
+
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li class="timeline-inverted">
+                    <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/solution.png"
+                            alt="..." /></div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h3>Decision Phase</h3>
+                            <h5 class="subheading">Fraudulent or Not</h5>
+                            <p class="text-muted">
+                                From SparseGAD's output, we predict whether a data is fraud or not.
+                                If it’s fraud, we notify authorities in charge to delve deeper to conclude whether 
+                                it was truly a fraud or not.
+
+
+                            </p>
+                        </div>
+                        <div class="timeline-body">
+                            <p class="text-muted"></p>
+                        </div>
+                    </div>
+                </li>
+             
+            </ul>
+        </div>
+    </section>
+
+    <!-- <li class="nav-item"><a class="nav-link" href="#about">Details on the Implementation</a></li> -->
+
+    <!-- Details on the Implementation -->
+    <section class="page-section bg-light" id="results">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Details on the Implementation</h2>
+                <h3 class="section-subheading text-muted">Models Details</h3>
+            </div>
+            <div>
+                <h3> How GraphSmote works </h3>
+                <p class='text-muted'>
+
+                    How over-sampling words in GraphSmote is by the model generating synthetic nodes. 
+                    First, we determine which class label belongs to the minority class, which in our case, is the anomalous users, 
+                    as they generally occur less frequently than the common users. 
+                    To generate synthetic nodes to amplify the minority class, 
+                    we use the upsampling method to randomly replicate nodes and reproduce their connections with their neighbors, 
+                    as seen in the image below. The reason we aim for identical neighbors for the synthetic nodes is to maintain a 
+                    similar level of heterogeneity for the links of the minority classes. We then add randomized minor differences in 
+                    the features of synthetic nodes to create distinctions between synthetic nodes and the original nodes, as in the 
+                    SMOTE method.
+                    <br>
+                </p>
+            </div>
+            <div>
+                <h3> How SparseGAD works </h3>
+                <p class='text-muted'>
+
+                    Overcoming sparsity task arose from the concern about the nature of anomalous users camouflaging themselves 
+                    among the common users. Thus, we added sparsification method from SparseGAD as seen on the figure below 
+                    to filter out elements in the adjacency matrix. We will use a delta as the threshold to remove unnecessary 
+                    neighbors.
+
+                    <br>
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Results-->
+    <section class="page-section bg-light" id="results">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Results</h2>
+                <h3 class="section-subheading text-muted">What did we find in this project?</h3>
+            </div>
+            <div>
+                <h3> Our Findings </h3>
+                <p class='text-muted'>
+
+                    Results to come...
+
+                    <br>
+
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- Discussion -->
+    <section class="page-section" id="discussion">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Discussion</h2>
+                <h3 class="section-subheading text-muted">What did we learn in this project?</h3>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-4">
+
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-screwdriver-wrench fa-stack-1x fa-inverse"></i>
+                    </span>
+
+                    <h4 class="my-3">Our Project</h4>
+                    <p class="text-muted">
+
+                        Fraud detection is prevalent now more than ever due to the massive surge in the usage of online platforms.
+                        Our research contributes to the study of such concern with a model that harnesses the benefits of many 
+                        existing models. We proposed a solution that utilizes a combination of oversampling techniques and 
+                        sparsity constraints to balance and predict fraud data.
+
+
+                    </p>
+                </div>
+
+                <div class="col-md-4">
+
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-wand-magic-sparkles fa-stack-1x fa-inverse"></i>
+                    </span>
+
+                    <h4 class="my-3">Limitations & Future </h4>
+                    <p class="text-muted">
+
+                        We’d like to expand our model to other datasets. 
+                        The three datasets were a test-run. We'd like to deploy our model in other datasets
+                        to make sure our predictions are within standards.
+
+                        We’d also like to finetune our model further.
+                        We performed hyperparameter tuning during GraphSmote phase.
+                        We'd like to continue experimenting with which hyperparameters are best fit.
+
+                        We are also interested in obtaining a partnership to deploy this model.
+                        As we mentioned, online fraud detection can be catastrophic to many and results in a lot of negative impression of internet.
+                        We'd like to help bridge cybersecurity fraud.
+
+
+                    </p>
+                </div>
+
+                <div class="col-md-4">
+
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-comments fa-stack-1x fa-inverse"></i>
+                    </span>
+
+                    <h4 class="my-3">The Models</h4>
+                    <p class="text-muted">
+
+                        Combination of GraphSmote and SparseGAD, as we can see, produced good results.
+
+                        However, there are many more models that exist. 
+
+                        We will need to find combinations of them which will be the most powerful in detecting fraud.
+
+                        Subject matter expertise and domain knowledge will be pinnacle in research of this domain
+                        to get the best model.
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="page-section bg-light" id="material">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Project Material</h2>
+                <h3 class="section-subheading text-muted">Our Deliverables</h3>
+            </div>
+            <div class="row text-center">
+
+                <div class='flex-container'>
+                    <div class='flex-item'>
+                        <h4>Report</h4>
+                        <p class='text-muted'> Our published paper with more information.</p>
+                        <span class="fa-stack fa-4x">
+                            <a href="assets/deliverables/report.pdf">
+                                <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                                <i class="fas fa-copy fa-stack-1x fa-inverse"></i></a>
+                        </span>
+                    </div>
+
+                    <div class='flex-item'>
+
+                        <h4>Poster</h4>
+                        <p class='text-muted'>Our showcase poster for presentation.</p>
+                        <span class="fa-stack fa-4x">
+                            <a href="assets/deliverables/poster.pdf">
+                                <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                                <i class="fas fa-microphone fa-stack-1x fa-inverse"></i></a>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+    </section>
+
+
+
+
+
+    <!-- Team-->
+    <section class="page-section" id="team">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Our Team</h2>
+                <h3 class="section-subheading text-muted">Meet our Team!</h3>
+            </div>
+            <div class='flex-container'>
+                <div class="flex-item">
+                    <div class="team-member">
+                        <img class="mx-auto rounded-circle" src="assets/img/team/Prabina_Pokharel_Pic.JPG" alt="..." />
+                        <h4>Prbaina Pokharel</h4>
+                        <p class="text-muted">UCSD '24, Data Science and Business-Economics</p>
+                        <a class="btn btn-dark btn-social mx-2" href="https://github.com/prabina-p"
+                            aria-label="Parveen Anand Facebook Profile"><i class="fab fa-github"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/prabina-pokharel/"
+                            aria-label="Parveen Anand LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="flex-item">
+                    <div class="team-member">
+                        <img class="mx-auto rounded-circle" src="assets/img/team/Prabina_Pokharel_Pic.jpg" alt="..." />
+                        <h4>Jingyu Zhang</h4>
+                        <p class="text-muted">UCSD '24, Data Science</p>
+                        <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com"
+                            aria-label="Diana Petersen LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class='flex-container'>
+                <div class="flex-item">
+                    <div class="team-member">
+                        <img class="mx-auto rounded-circle" src="assets/img/team/Prabina_Pokharel_Pic.jpeg" alt="..." />
+                        <h4>Yandong Xiang</h4>
+                        <p class="text-muted"></p>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer-->
+    <footer class="footer py-4 bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4 text-lg-start">Copyright &copy; Prabina Pokharel 2024</div>
+                <div class="col-lg-4 my-3 my-lg-0">
+
+                    <script>
+                        function about() {
+                            alert(
+                                'This website was made by Prabina Pokharel for the DSC180b course at UC San Diego. You can see the codebase for the work represented here by clicking on the GitHub icon at the bottom of the page! Thank you for visiting. '
+                            );
+                        }
+
+                    </script>
+
+                    <a class="btn btn-dark btn-social mx-2" href="https://github.com/gprasad125/dsc180b"
+                        aria-label="Github"><i class="fab fa-github"></i></a>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <a class="link-dark text-decoration-none me-3" href="#!" onclick="about()">About This Site</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Portfolio Modals-->
+    <!-- Portfolio item 1 modal popup-->
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg"
+                        alt="Close modal" /></div>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="modal-body">
+                                <!-- Project details-->
+                                <h2 class="text-uppercase">Relevance Distribution</h2>
+                                <img class="img-fluid d-block mx-auto" src="assets/img/eda/relevance.png" alt="..." />
+                                <p class="text-muted">
+                                    The figure shows the distribution of relevant and irrelevant Tweets about China in
+                                    the original dataset. The number of 'Relevant' tweets (demarcated 'True') is over
+                                    twice the number of 'Irrelevant' Tweets, reflecting a class imbalance.
+                                </p>
+                                <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal"
+                                    type="button">
+                                    <i class="fas fa-xmark me-1"></i>
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Portfolio item 2 modal popup-->
+    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg"
+                        alt="Close modal" /></div>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="modal-body">
+                                <!-- Project details-->
+                                <h2 class="text-uppercase">Sentiment Distribution</h2>
+                                <img class="img-fluid d-block mx-auto" src="assets/img/eda/sentiment.png" alt="..." />
+                                <p class="text-muted">
+                                    The figure shows the distribution of sentiment scores toward China in the original
+                                    dataset. The sentiment scores are in range from 1 to 5 (1 = very negative, 3 =
+                                    neutral, 5 = very positive). Tweets with sentiment score 0 and 6 are outliers. We
+                                    can see that negative Tweets, scoring < 3 are represented far more than Tweets that
+                                        score more positive. </p>
+                                        <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal"
+                                            type="button">
+                                            <i class="fas fa-xmark me-1"></i>
+                                            Close
+                                        </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Portfolio item 3 modal popup-->
+    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg"
+                        alt="Close modal" /></div>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="modal-body">
+                                <!-- Project details-->
+                                <h2 class="text-uppercase">Sentiment Over Time</h2>
+                                <img class="img-fluid d-block mx-auto" src="assets/img/eda/sentiment_by_time.png"
+                                    alt="..." />
+                                <p class="text-muted">
+                                    This plot shows how the general sentiment towards China has varied across the time
+                                    period in the data (2010-20) by party. Most notably, it is nearly consistently
+                                    negative, with the Democrats in 2015 having the highest average sentiment still
+                                    falling below 3.0. This also helps to explain why negative Tweets dominate the
+                                    dataset.
+                                </p>
+
+                                <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal"
+                                    type="button">
+                                    <i class="fas fa-xmark me-1"></i>
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Portfolio item 4 modal popup-->
+    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg"
+                        alt="Close modal" /></div>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="modal-body">
+                                <!-- Project details-->
+                                <h2 class="text-uppercase">Tweet Count by State</h2>
+                                <img class="img-fluid d-block mx-auto" src="assets/img/eda/TweetsByState.png"
+                                    alt="..." />
+                                <p class='text-muted'>
+                                    Here, we see which U.S. states are most represented in our dataset. We note that
+                                    among the most represented are the most populous -- Texas, California, Florida, etc.
+
+                                    However, we also note that there is a strong Republican presence in the dataset,
+                                    which also helps to explain the overwhelming negative Tweet count, as the Republican
+                                    party has been consistently negative in their attiude towards China across the
+                                    dataset's timeframe.
+                                </p>
+                                <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal"
+                                    type="button">
+                                    <i class="fas fa-xmark me-1"></i>
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Portfolio item 5 modal popup-->
+    <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg"
+                        alt="Close modal" /></div>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="modal-body">
+                                <!-- Project details-->
+                                <h2 class="text-uppercase">Project Name</h2>
+                                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                                <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/5.jpg" alt="..." />
+                                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
+                                    adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
+                                    repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae,
+                                    nostrum, reiciendis facere nemo!</p>
+                                <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal"
+                                    type="button">
+                                    <i class="fas fa-xmark me-1"></i>
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Portfolio item 6 modal popup-->
+    <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg"
+                        alt="Close modal" /></div>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="modal-body">
+                                <!-- Project details-->
+                                <h2 class="text-uppercase">Project Name</h2>
+                                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                                <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/6.jpg" alt="..." />
+                                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
+                                    adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
+                                    repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae,
+                                    nostrum, reiciendis facere nemo!</p>
+                                <ul class="list-inline">
+                                    <li>
+                                        <strong>Client:</strong>
+                                        Window
+                                    </li>
+                                    <li>
+                                        <strong>Category:</strong>
+                                        Photography
+                                    </li>
+                                </ul>
+                                <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal"
+                                    type="button">
+                                    <i class="fas fa-xmark me-1"></i>
+                                    Close Project
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <!-- * *                               SB Forms JS                               * *-->
+    <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</body>
+
+</html>
