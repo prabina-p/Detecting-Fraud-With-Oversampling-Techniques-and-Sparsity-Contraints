@@ -8,4 +8,4 @@ Team Members include Prabina Pokharel, Jingyu Zhang, Yandong (Dennis) Xiang
 This GitHub Pages uses the **[Agency](https://startbootstrap.com/theme/agency)** theme from Bootstrap. 
 
 # Website
-You can access the webpage [here](http://prabina-p.github.io)
+You can access the webpage [here](http://prabina-p.github.io/Detecting-Fraud-With-Oversampling-Techniques-and-Sparsity-Contraints)
