@@ -46,7 +46,8 @@
     <header class="masthead">
         <div class="container">
             <div class="masthead-subheading">Prabina Pokharel / Jingyu Zhang / Yandong (Dennis) Xiang</div>
-            <div class="masthead-heading text-uppercase">Detecting Fraud With Oversampling Techniques and Sparsity Contraints</div>
+            <div class="masthead-heading text-uppercase">Detecting Fraud With Oversampling Techniques and Sparsity
+                Contraints</div>
             <a class="btn btn-primary btn-xl text-uppercase" href="#services">Tell Me More</a>
         </div>
     </header>
@@ -64,12 +65,14 @@
                         <i class="fa-solid fa-school fa-stack-1x fa-inverse"></i>
                     </span>
                     <h4 class="my-3">Motivation</h4>
-                    <p class="text-muted">In recent years, there has been a huge surge in the usage of online platforms like Reddit,
+                    <p class="text-muted">In recent years, there has been a huge surge in the usage of online platforms
+                        like Reddit,
                         Yelp, and Amazon. While the usage of such platforms has positively influenced our daily
                         lives, fraudulent activities is amid this rapid increase in digital data volume and anonymity
                         of online networks. Fraudulent behaviors are executed and hidden in plain sight of this
                         vast amount of online records. Thus, enhancing fraud detection is crucial to protect us
                         from fraudsters against harmful scams, and even criminal activities.
+                        By tackling this fraud detection task, we hope to contribute to protecting us against scams.
                     </p>
                 </div>
                 <div class="col-md-4">
@@ -78,15 +81,15 @@
                         <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
                     </span>
                     <h4 class="my-3">Need For Better Fraud Detection Method</h4>
-                    <p class="text-muted">Many techniques exist to combat fraud; 
-                        however, they often fail to capture the imbalancement in class data involving 
-                        fraudulent activities. It’s important to tackle such concern so we can harness its
-                        power to correctly predict anomalies. So, the question remains: How can we
-                        effectively detect and mitigate fraudulent activities, especially when faced
-                        with imbalanced datasets? Our research contributes to the study of such 
-                        concern with a model that harnesses the benefits of many existing models. We
-                        propose a solution that utilizes a combination of oversampling techniques and
-                        sparsity constraints to balance and predict fraud data.
+                    <p class="text-muted">Many techniques exist to combat fraud; however, they often fail to capture the
+                        imbalanced class structure in data involving fraudulent activities. It's important to tackle
+                        such
+                        concern so we can harness its power to correctly predict anomalies. So, the question remains:
+                        How can we effectively detect and mitigate fraudulent activities, especially when faced with
+                        imbalanced
+                        datasets? Our research contributes to the study of such concern with a model that harnesses the
+                        strengths
+                        of many existing techniques from different domains.
                     </p>
                 </div>
                 <div class="col-md-4">
@@ -96,17 +99,19 @@
                         <!-- <i class="fa-solid fa-user-secret"></i> -->
                     </span>
                     <h4 class="my-3">Our Proposed Solution</h4>
-                    <p class="text-muted">So, our proposed solution is the combination of 2 models: GraphSmote and SparseGAD.
-                        GraphSmote, although not commonly
+                    <p class="text-muted">
+                        Our proposed solution utilizes a combination of
+                        2 models: GraphSMOTE and SparseGAD.
+                        GraphSMOTE, although not commonly
                         used for fraud detection, is an oversampling technique that identifies minority class nodes
-                        and creates new nodes that resemble those minority class data points, thus helping it 
-                        balance. Since datasets involving fraud detection are hugely imbalanced, GraphSmote will
+                        and creates new nodes that resemble those minority class data points, thus helping it
+                        balance. Since datasets involving fraud detection are hugely imbalanced, GraphSMOTE will
                         help us balance the class distribution in the graph. We will then take the output of this
-                        GraphSmote and feed it into SparseGAD, known for anomaly detection by introducing 
+                        GraphSMOTE and feed it into SparseGAD, known for anomaly detection by introducing
                         sparsity constraints. Such constraints help highlight significant connections, and anything that
-                        substantially deviates from that will be looked into further for fraud. We will discuss our
-                        model in more detail in the Methods section of this paper.
-                        By tackling this fraud detection task, we hope to contribute to protecting us against scams.
+                        substantially deviates from that will be looked into further for fraud. Upon applying
+                        these techniques, we utilize Graph Neural Networks (GNNs) for our model.
+
                     </p>
                 </div>
             </div>
@@ -125,18 +130,26 @@
             <div class="dataset-details">
                 <h3>Details on our dataset</h3>
                 <p class='text-muted'>
-                    Our model utilizes three datasets - Amazon, Yelp, and Reddit. These datasets are obtained from the Deep Graph Library (DGL) in graph format. 
+                    Our model utilizes three datasets - Amazon, Yelp, and Reddit. These datasets are obtained from the
+                    Deep Graph Library (DGL) and PyGOD in graph format.
                     Each dataset exhibits class imbalance:
                 </p>
                 <ul>
-                    <li><strong>Amazon Dataset:</strong> Features product reviews under the Musical Instruments category. It's a binary classification task with a 1:10.5 positive (fraudulent) to negative (benign) ratio.</li>
-                    <li><strong>Yelp Dataset:</strong> Consists of hotel and restaurant reviews, with a 1:5.9 imbalance between spam and legitimate reviews.</li>
-                    <li><strong>Reddit Dataset:</strong> Comprises community posts from September 2014, with 3.3% anomalies detected.</li>
+                    <li><strong><a href="https://docs.dgl.ai/en/0.8.x/generated/dgl.data.FraudAmazonDataset.html"
+                                target="_blank">Amazon Dataset:</a></strong> Features product reviews under the Musical
+                        Instruments category. It's a binary classification task with a 1:10.5 positive (fraudulent) to
+                        negative (benign) ratio.</li>
+                    <li><strong><a href="https://docs.dgl.ai/en/0.8.x/generated/dgl.data.FraudYelpDataset.html"
+                                target="_blank">Yelp Dataset:</a></strong> Consists of hotel and restaurant reviews,
+                        with a 1:5.9 imbalance between spam and legitimate reviews.</li>
+                    <li><strong><a href="https://github.com/pygod-team/data" target="_blank">Reddit
+                                Dataset:</a></strong> Comprises community posts from September 2014, with 3.3% anomalies
+                        detected.</li>
                 </ul>
             </div>
         </div>
     </section>
-    
+
 
 
 
@@ -149,80 +162,90 @@
         <div class="container">
             <div class="text-center">
                 <h2 class="section-heading text-uppercase">Methods</h2>
-                <h3 class="section-subheading text-muted">Timeline of development for our two models.</h3>
+                <h3 class="section-subheading text-muted">Timeline of development for our model.</h3>
             </div>
             <ul class="timeline">
                 <li>
-                    <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/dataset.png"
-                            alt="..." /></div>
-                    <div class="timeline-panel">
-                        <div class="timeline-heading">
-                            <h3>Obtain Dataset</h3>
-                            <h5 class="subheading">Choosing the Right Dataset based on Structure</h5>
-                        </div>
-                        <div class="timeline-body">
-                            <p class="text-muted">We chose Amazon, Yelp, and Reddit datasets carefully based on its imbalanced structure.
-                                Imbalanced datasets are valuable for our model, 
-                                which aims to address class imbalances in anomaly detection tasks.
-                            </p>
-                        </div>
-                    </div>
-                </li>
-                <li class="timeline-inverted">
                     <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/writing.png"
                             alt="..." /></div>
                     <div class="timeline-panel">
                         <div class="timeline-heading">
-                            <h3>First model</h3>
-                            <h5 class="subheading">GraphSmote</h5>
+                            <h3>Oversampling Technique</h3>
+                            <h5 class="subheading">GraphSMOTE</h5>
+                        </div>
+                        <div class="timeline-body">
+                            <p class="text-muted">
+
+                                We feed our imbalanced datasets into GraphSMOTE, which balances it by generating
+                                synthetic nodes.
+                                It addresses the imbalance by adding synthetic
+                                anomalous nodes to the graph, amplifying the minority class. These synthetic nodes
+                                maintain
+                                connections with existing nodes while preserving heterogeneity among links.
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li class="timeline-inverted">
+                    <div class="timeline-image"><img class="rounded-circle img-fluid"
+                            src="assets/img/about/handyman.png" alt="..." /></div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h3>Introducing Sparsity</h3>
+                            <h5 class="subheading">SparseGAD</h5>
                         </div>
                         <div class="timeline-body">
 
                             <p class="text-muted">
-                                We feed our datasets into Graph-Smote model. 
-                                GraphSmote, although not commonly used for fraud detection, is an oversampling technique that 
-                                identifies minority class nodes and creates new nodes that resemble those minority class data points, 
-                                thus helping it balance. Since datasets involving fraud detection are hugely imbalanced, 
-                                GraphSmote will help us balance the class distribution in the graph. 
-
-                                There, we finetune some hyperparameters to achieve a better ROC-AUC score.
+                                GraphSMOTE alone doesn't fully capture the dissimilarity of anomalous nodes with their
+                                connected
+                                users. To address this, SparseGAD introduces sparsity,
+                                utilizing a learnable adjacency matrix ("homey" matrix) derived from cosine similarity
+                                calculations. This matrix helps identify whether connected nodes are similar or
+                                dissimilar,
+                                enhancing the model's ability to detect anomalous nodes exhibiting heterophilic
+                                behaviors.
                             </p>
 
                         </div>
                     </div>
                 </li>
                 <li>
-                    <div class="timeline-image"><img class="rounded-circle img-fluid"
-                            src="assets/img/about/handyman.png" alt="..." /></div>
+                    <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/model.png"
+                            alt="..." /></div>
                     <div class="timeline-panel">
                         <div class="timeline-heading">
-                            <h3>Second model</h3>
-                            <h5 class="subheading">SparseGAD</h5>
+                            <h3>GNN Models</h3>
+                            <h5 class="subheading">GCN, GAT, GraphSage</h5>
                         </div>
                         <div class="timeline-body">
                             <p class="text-muted">
-                                We take the output of GraphSmote and feed it as input to SparseGAD model.
-                                SparseGAD is known for anomaly detection by introducing sparsity constraints. 
-                                Such constraints help highlight significant connections, and anything that substantially deviates 
-                                from that will be looked into further for fraud.
+                                Upon applying these techniques, we feed in the output to our GNNs to
+                                obtain a result. The 3 GNNs we use are Graph Convolutional Networks (GCN), Graph
+                                Attention Networks (GAT),
+                                and GraphSage. We utilize different
+                                preprocessing technique, or "paths" before applying these GNN models. The main 3 paths,
+                                as well as
+                                a description of these 3 GNN models will be discussed
+                                in detail in the Implementation section.
 
                             </p>
                         </div>
                     </div>
                 </li>
                 <li class="timeline-inverted">
-                    <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/solution.png"
-                            alt="..." /></div>
+                    <div class="timeline-image"><img class="rounded-circle img-fluid"
+                            src="assets/img/about/solution.png" alt="..." /></div>
                     <div class="timeline-panel">
                         <div class="timeline-heading">
                             <h3>Decision Phase</h3>
                             <h5 class="subheading">Fraudulent or Not</h5>
                             <p class="text-muted">
-                                From SparseGAD's output, we predict whether a data is fraud or not.
-                                If it’s fraud, we notify authorities in charge to delve deeper to conclude whether 
-                                it was truly a fraud or not.
-
-
+                                Finally, we use the trained GNN model to classify nodes as either fraudulent or
+                                non-fraudulent
+                                based on their features and neighborhood structure. We evaluate the model’s performance
+                                using the ROC-AUC score based on its ability to correctly identify anomalies in the
+                                dataset.
                             </p>
                         </div>
                         <div class="timeline-body">
@@ -230,7 +253,7 @@
                         </div>
                     </div>
                 </li>
-             
+
             </ul>
         </div>
     </section>
@@ -245,18 +268,26 @@
                 <h3 class="section-subheading text-muted">Models Details</h3>
             </div>
             <div>
-                <h3> How GraphSmote works </h3>
+                <h3> How GraphSMOTE works </h3>
                 <p class='text-muted'>
 
-                    How over-sampling words in GraphSmote is by the model generating synthetic nodes. 
-                    First, we determine which class label belongs to the minority class, which in our case, is the anomalous users, 
-                    as they generally occur less frequently than the common users. 
-                    To generate synthetic nodes to amplify the minority class, 
-                    we use the upsampling method to randomly replicate nodes and reproduce their connections with their neighbors, 
-                    as seen in the image below. The reason we aim for identical neighbors for the synthetic nodes is to maintain a 
-                    similar level of heterogeneity for the links of the minority classes. We then add randomized minor differences in 
-                    the features of synthetic nodes to create distinctions between synthetic nodes and the original nodes, as in the 
-                    SMOTE method.
+                    In the synthetic node generation process, SMOTE method is utilized to amplify the minority class, typically anomalous users. Synthetic nodes are created by replicating existing nodes and their connections, maintaining heterogeneity in links. The "homey" adjacency matrix replaces the original adjacency matrix, enabling the calculation of cosine similarity between adjacent node pairs.
+
+                    This diagram explains GraphSMOTE:
+                    <img src="assets/img/GraphSMOTE.jpg" alt='GraphSMOTE Diagram' style="display: block; margin: 0 auto;">
+
+                    
+
+                    
+                    In short:
+                    <ul>
+                        <li>Generates synthetic nodes for minority class</li>
+                        <li>Upsampling method “replicates” nodes and connections</li>
+                        <li>Maintains heterogeneity in links</li>
+                        <li>Adds minor differences for distinction</li>
+                    </ul>
+
+                    
                     <br>
                 </p>
             </div>
@@ -264,11 +295,63 @@
                 <h3> How SparseGAD works </h3>
                 <p class='text-muted'>
 
-                    Overcoming sparsity task arose from the concern about the nature of anomalous users camouflaging themselves 
-                    among the common users. Thus, we added sparsification method from SparseGAD as seen on the figure below 
-                    to filter out elements in the adjacency matrix. We will use a delta as the threshold to remove unnecessary 
-                    neighbors.
+                    Sparsification techniques further refine the graph by filtering unnecessary connections using a threshold δ and limiting connections through KNN. Graph Anomaly Detection (GAD)-oriented regularization is applied to prevent faulty links, enhancing the model's accuracy in distinguishing anomalous users.
 
+                    This diagram explains SparseGAD:
+                    <img src="assets/img/SparseGAD.jpg" alt='SparseGAD Diagram' style="display: block; margin: 0 auto;">
+
+                    In short:
+                    <ul>
+                        <li>Fraudulent users tend to link with heterophilic users</li>
+                        <li>SparseGAD adjusts adjacency matrix to separate homophily and heterophily links</li>
+                        <li>Filters unnecessary elements in homey adjacency matrix</li>
+                        <li>Uses threshold delta and KNN to remove unnecessary links</li>
+                    </ul>
+                   
+
+                    <br>
+                </p>
+            </div>
+            <div>
+                <h3> How GNNs works </h3>
+                <p class='text-muted'>
+                    
+                    <ul>
+                        <li>GCN aggregates information from neighboring nodes to update node representations, 
+                        capturing local graph structures effectively.</li>
+                        <li>GAT employs attention mechanisms to dynamically weigh the importance of neighboring nodes during information aggregation, enhancing the model's ability to capture complex relationships in the graph.</li>
+                        <li>GraphSage generates node embeddings by sampling and aggregating features from a fixed number of neighbors, enabling scalable and robust representation learning on large and heterogeneous graphs.</li>
+                    </ul>
+                    <br>
+                </p>
+            </div>
+
+            <div>
+                <h3> Three Main Paths </h3>
+                <p class='text-muted'>
+
+                    Our approach to detecting fraud involves three main paths, each of which utilizes a different
+                    preprocessing technique before applying GNN models (such as GCN, GAT, or GraphSage).
+                    The following visualizes the workflow:
+                    <img src="assets/img/data-workflow.jpg" alt='Data Workflow' style="display: block; margin: 0 auto;">
+
+                    In short,
+
+                    <ul>
+                        <li><strong>Baseline Path</strong>: Here, we directly input the dataset into the chosen GNN model. This
+                        path serves as our baseline for comparison against the other paths.</li>
+                        <li><strong>GraphSMOTE Path</strong>: In this path, we apply the GraphSMOTE technique discussed in
+                        the Methods section before feeding it into the chosen GNN model. Again, GraphSMOTE
+                        is an oversampling technique, which helps address the imbalance in the dataset by
+                        generating synthetic nodes.</li>
+                        <li><strong>GraphSMOTE with New Adjacency Matrix Path</strong>: In this path, we utilize GraphSMOTE
+                        and the principles of SparseGAD. Here, the SparseGAD receives the balanced dataset
+                        generated by GraphSMOTE and incorporates consine similarity matrix and sparsity
+                        constraints which helps highlight significant connections and anomalies in the graph.</li>
+                    </ul>
+
+        
+           
                     <br>
                 </p>
             </div>
@@ -296,13 +379,50 @@
             </div>
             <div>
                 <h3> Our Findings </h3>
-                <p class='text-muted'>
+                Now, let’s compare the models’ performance on each of these datasets.
+                    <div style="overflow: auto;">
+                        <img src="assets/img/results.jpg" alt="Result" style="float: right; margin-right: 10px; width: 40%; height: auto;">
+                        <p class="text-muted">
+                            As we can see in the table, the GraphSage model performs best on Yelp and Reddit datasets,
+                            and the GraphSage with Modified GraphSMOTE performs best on the Amazon dataset.
+                        </p>
+                        <p class="text-muted">
+                            We first aim to explain why GraphSAGE outperforms GCN and GAT on the Yelp and Reddit
+                            datasets, while achieving a similar ROC-AUC score on the Amazon dataset. Our intuition is that
+                            this discrepancy arises from the structural differences between the datasets. It's important to note that both the Yelp and Reddit datasets exhibit relatively sparser structures, whereas
+                            the Amazon dataset presents a more condensed structure. This condensed structure in the Amazon dataset allows the weights in the GAT model on each neighbor’s features to
+                            have greater significance compared to those in the Yelp and Reddit datasets. On the other
+                            hand, the GraphSAGE model samples and aggregates from the neighboring nodes. On the
+                            Yelp and Reddit datasets, the simplicity of the GraphSAGE method facilitates better model
+                            tuning and results in improved convergence, thereby enabling the GraphSAGE model to
+                            outperform the GAT model on these datasets.
+                        </p>
+                           
+                        <p class="text-muted">
+                            The main reasons why we believe our GraphSAGE performs well on the Yelp and Reddit
+                            datasets, and GraphSAGE with Modified GraphSMOTE on the Amazon dataset, are related
+                            to the degrees of connectivity and the number of connected nodes. Below, we present the
+                            degree distribution of the datasets.
+                        </p>
+                        <p class="text-muted">
+                            In the Yelp and Reddit datasets, the median number of degrees is lower
+                            (6 and 1 respectively) vs. Amazon (which has 42). This discrepancy may reflect variations
+                            in the connectivity and structural complexity of the datasets, which directly influence the
+                            performance of fraud detection models. Furthermore, Yelp and Reddit datasets have more
+                            nodes with only self-loops (106 and 625 respectively) compared to Amazon (which has 6).
+                            This lack of connectivity in the Yelp and Amazon datasets limits the potential for synthetic
+                            nodes generated by the SMOTE method to establish meaningful connections within the
+                            graph. As a result, the ability of the SMOTE method to effectively balance the class distribution while maintaining dataset structure may be constrained in Yelp and Reddit datasets
+                            whereas flourished in the Amazon dataset. Thus, the GraphSMOTE and the Modified
+                            GraphSMOTE models were unable to surpass the performance of the baseline GraphSage
+                            model
+                        </p>
+                        <p class="text-muted">
+                            This disparity in performance highlights the importance of tailoring the model to the characteristics of the dataset.
+                        </p>
+                    </div>
 
-                    Results to come...
-
-                    <br>
-
-                </p>
+                    
             </div>
         </div>
     </section>
@@ -328,9 +448,12 @@
                     <h4 class="my-3">Our Project</h4>
                     <p class="text-muted">
 
-                        Fraud detection is prevalent now more than ever due to the massive surge in the usage of online platforms.
-                        Our research contributes to the study of such concern with a model that harnesses the benefits of many 
-                        existing models. We proposed a solution that utilizes a combination of oversampling techniques and 
+                        Fraud detection is prevalent now more than ever due to the massive surge in the usage of online
+                        platforms.
+                        Our research contributes to the study of such concern with a model that harnesses the benefits
+                        of many
+                        existing models. We proposed a solution that utilizes a combination of oversampling techniques
+                        and
                         sparsity constraints to balance and predict fraud data.
 
 
@@ -347,17 +470,13 @@
                     <h4 class="my-3">Limitations & Future </h4>
                     <p class="text-muted">
 
-                        We’d like to expand our model to other datasets. 
-                        The three datasets were a test-run. We'd like to deploy our model in other datasets
-                        to make sure our predictions are within standards.
+                        In the future, we would like to refine our model to accommodate variability in datasets such as degrees of connectivity and number of connected nodes.
+                        
 
-                        We’d also like to finetune our model further.
-                        We performed hyperparameter tuning during GraphSmote phase.
-                        We'd like to continue experimenting with which hyperparameters are best fit.
-
-                        We are also interested in obtaining a partnership to deploy this model.
-                        As we mentioned, online fraud detection can be catastrophic to many and results in a lot of negative impression of internet.
-                        We'd like to help bridge cybersecurity fraud.
+                        We would also like to seek partnerships for deployment and cybersecurity collaboration.
+                        As mentioned, online fraud detection can be catastrophic to many and results in a
+                        negative impression of internet.
+                        Our goal is to contribute to bridging the gap in cybersecurity fraud detection.
 
 
                     </p>
@@ -373,14 +492,13 @@
                     <h4 class="my-3">The Models</h4>
                     <p class="text-muted">
 
-                        Combination of GraphSmote and SparseGAD, as we can see, produced good results.
+                        The fusion of GraphSMOTE and SparseGAD showcased promising results, more specifically for Amazon dataset.
 
-                        However, there are many more models that exist. 
+                        However, there are many more models that exist.
 
-                        We will need to find combinations of them which will be the most powerful in detecting fraud.
+                        We would need to find a combinations of them which will be the most powerful in detecting fraud.
 
-                        Subject matter expertise and domain knowledge will be pinnacle in research of this domain
-                        to get the best model.
+                        Leveraging subject matter expertise and domain knowledge will be invaluable assets in research of this domain.
 
                     </p>
                 </div>
@@ -399,9 +517,9 @@
                 <div class='flex-container'>
                     <div class='flex-item'>
                         <h4>Report</h4>
-                        <p class='text-muted'> Our published paper with more information.</p>
+                        <p class='text-muted'> Our published paper with detailed information.</p>
                         <span class="fa-stack fa-4x">
-                            <a href="assets/deliverables/report.pdf">
+                            <a href="assets/deliverables/report.pdf" target="_blank">
                                 <i class="fas fa-circle fa-stack-2x text-primary"></i>
                                 <i class="fas fa-copy fa-stack-1x fa-inverse"></i></a>
                         </span>
@@ -410,9 +528,9 @@
                     <div class='flex-item'>
 
                         <h4>Poster</h4>
-                        <p class='text-muted'>Our showcase poster for presentation.</p>
+                        <p class='text-muted'>Our poster with a brief overview of our research.</p>
                         <span class="fa-stack fa-4x">
-                            <a href="assets/deliverables/poster.pdf">
+                            <a href="assets/deliverables/poster.pdf" target="_blank">
                                 <i class="fas fa-circle fa-stack-2x text-primary"></i>
                                 <i class="fas fa-microphone fa-stack-1x fa-inverse"></i></a>
                         </span>
@@ -437,35 +555,39 @@
             <div class='flex-container'>
                 <div class="flex-item">
                     <div class="team-member">
-                        <img class="mx-auto rounded-circle" src="assets/img/team/Prabina_Pokharel_Pic.JPG" alt="..." />
-                        <h4>Prbaina Pokharel</h4>
+                        <img class="mx-auto rounded-circle" src="assets/img/team/Prabina_Pokharel.JPG" alt="..." />
+                        <h4>Prabina Pokharel</h4>
                         <p class="text-muted">UCSD '24, Data Science and Business-Economics</p>
                         <a class="btn btn-dark btn-social mx-2" href="https://github.com/prabina-p"
-                            aria-label="Parveen Anand Facebook Profile"><i class="fab fa-github"></i></a>
+                            aria-label="Parveen Anand Facebook Profile" target="_blank"><i class="fab fa-github"></i></a>
                         <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/prabina-pokharel/"
-                            aria-label="Parveen Anand LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                            aria-label="Parveen Anand LinkedIn Profile" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 <div class="flex-item">
                     <div class="team-member">
-                        <img class="mx-auto rounded-circle" src="assets/img/team/Prabina_Pokharel_Pic.jpg" alt="..." />
+                        <img class="mx-auto rounded-circle" src="assets/img/team/Jingyu_Zhang.jpeg" alt="..." />
                         <h4>Jingyu Zhang</h4>
                         <p class="text-muted">UCSD '24, Data Science</p>
-                        <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com"
-                            aria-label="Diana Petersen LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="https://github.com/MonkeyJeremy"
+                            aria-label="Parveen Anand Facebook Profile" target="_blank"><i class="fab fa-github"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/jingyu-zhang-66a46a186/"
+                            aria-label="Parveen Anand LinkedIn Profile" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
             </div>
-            <div class='flex-container'>
-                <div class="flex-item">
-                    <div class="team-member">
-                        <img class="mx-auto rounded-circle" src="assets/img/team/Prabina_Pokharel_Pic.jpeg" alt="..." />
-                        <h4>Yandong Xiang</h4>
-                        <p class="text-muted"></p>
-                    </div>
-                </div>
+            <div class="flex-item">
+                <div class="team-member">
+                    <img class="mx-auto rounded-circle" src="assets/img/team/Yangdong_Xiang.jpg" alt="..." />
+                    <h4>Yandong Xiang</h4>
+                    <p class="text-muted">UCSD '24, Data Science</p>
+                    <a class="btn btn-dark btn-social mx-2" href="https://github.com/yandongxiang"
+                        aria-label="Parveen Anand Facebook Profile" target="_blank"><i class="fab fa-github"></i></a>
+                    <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/yandong-xiang-536652226/"
+                        aria-label="Parveen Anand LinkedIn Profile" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
+        </div>
         </div>
     </section>
 
@@ -480,13 +602,14 @@
                     <script>
                         function about() {
                             alert(
-                                'This website was made by Prabina Pokharel for the DSC180b course at UC San Diego. You can see the codebase for the work represented here by clicking on the GitHub icon at the bottom of the page! Thank you for visiting. '
+                                'This website was made by Prabina Pokharel for Data Science Capstone at UC San Diego. You can see the codebase for the work represented here by clicking on the GitHub icon at the bottom of the page! Thank you for visiting. '
                             );
                         }
 
                     </script>
 
-                    <a class="btn btn-dark btn-social mx-2" href="https://github.com/prabina-p/Detecting-Fraud-With-Oversampling-Techniques-and-Sparsity-Contraints"
+                    <a class="btn btn-dark btn-social mx-2"
+                        href="https://github.com/prabina-p/Detecting-Fraud-With-Oversampling-Techniques-and-Sparsity-Contraints"
                         aria-label="Github"><i class="fab fa-github"></i></a>
                 </div>
                 <div class="col-lg-4 text-lg-end">
